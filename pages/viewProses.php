@@ -25,25 +25,28 @@ include 'src/koneksi.php';
                         ?>
                     </select>
                 </div>
-                <div class="form-group">
+                <?php
+                $formVariabel = $kon->query("SELECT * FROM variabel WHERE tipe_variabel='Input' ORDER BY id_variabel");
+                while ($dataFormVariabel = $formVariabel->fetch_array()) {
+                ?>
+                    <div class="form-group">
+                        <label for=""><?php echo $dataFormVariabel['nama_variabel'] ?></label>
+                        <input type="number" name="<?php echo $dataFormVariabel['id_variabel'] ?>" class="form-control" placeholder="<?php echo $dataFormVariabel['nama_variabel'] ?>">
+                    </div>
+                <?php
+                }
+
+                ?>
+
+                <!-- <div class="form-group">
                     <label for="">Berat Badan</label>
                     <input type="number" name="berat" class="form-control" placeholder="Berat Badan">
                 </div>
                 <div class="form-group">
                     <label for="">Tinggi Badan</label>
                     <input type="number" name="tinggi" class="form-control" placeholder="Tinggi Badan">
-                </div>
-                <div class="form-group">
-                    <label for="">Stadium</label>
-                    <select name="stadium" class="form-control">
-                        <option value="">-Pilih Stadium-</option>
-                        <option value="1">I</option>
-                        <option value="2">II</option>
-                        <option value="3">III</option>
-                        <option value="4">IV</option>
+                </div> -->
 
-                    </select>
-                </div>
 
             </div>
             <!-- /.card-body -->
@@ -59,10 +62,14 @@ include 'src/koneksi.php';
                 $pasien   = $_POST['pasien'];
 
                 $variabel = $kon->query("SELECT * FROM variabel WHERE tipe_variabel='Input' ORDER BY id_variabel");
+                $jumVariabel = $variabel->num_rows;
+                $dataForm = array();
 
-                // $berat       = $_POST['berat'];
-                // $tinggi      = $_POST['tinggi'];
-                // $stadium      = $_POST['stadium'];
+                while ($dataVariabel = $variabel->fetch_array()) {
+                    $dataForm[] = $_POST[$dataVariabel['id_variabel']];
+                }
+
+                $jsonData = json_encode($dataForm);
 
                 $sqlPasien = $kon->query("SELECT * FROM `pasien` WHERE id_pasien='$pasien'");
 
@@ -71,7 +78,7 @@ include 'src/koneksi.php';
                 $year = substr($dataPasien['tgl_lahir'], 0, 4);
                 $umur = $now - $year;
 
-                step1($umur, $berat, $tinggi, $stadium);
+                step1($jsonData);
             }
 
 
@@ -84,12 +91,15 @@ include 'src/koneksi.php';
 
 <?php
 
-function step1($umur, $berat, $tinggi, $statium)
+function step1($data)
 {
     include 'src/koneksi.php';
 
-
+    $arrData = json_decode($data);
+    print_r($arrData);
+    exit;
     $variabel = $kon->query("SELECT * FROM variabel WHERE tipe_variabel='Input' ORDER BY id_variabel");
+    $index = 0;
     while ($dataVariabel = $variabel->fetch_array()) {
         $idVariabel = $dataVariabel['id_variabel'];
 
@@ -111,11 +121,10 @@ function step1($umur, $berat, $tinggi, $statium)
         $jumDataUnion = count($unionArr);
 
         if ($jumDataUnion == 3) {
-            if($unionArr)
 
-
-        } else if ($jumDataUnion == 4) {
-
+            if ($arrData[$index] > $unionArr[0] && $arrData[$index] < $unionArr[1]) {
+                # code...
+            }
         }
     }
     return null;

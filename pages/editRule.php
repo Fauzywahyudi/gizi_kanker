@@ -122,6 +122,8 @@ foreach ($if_rule as $key) {
                 $kode = $_POST['kode'];
                 $if = json_encode($data);
                 $then = $_POST['then'];
+                // echo $if;
+                // exit;
                 if (empty($kode) || empty($if) || empty($then)) {
                     echo "<script>
                     alert('Harap isi semua data');
@@ -132,9 +134,11 @@ foreach ($if_rule as $key) {
                     `if_rule`='$if',
                     `then_rule`='$then' 
                     WHERE id_rule='$data[id_rule]'");
-                    echo "<script>
-                    window.location='index.php?page=viewRule';
-                    </script>";
+                    if ($ins) {
+                        echo "<script>
+                        window.location='index.php?page=viewRule';
+                        </script>";
+                    }
                 }
             }
 

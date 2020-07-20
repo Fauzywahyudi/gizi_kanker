@@ -21,7 +21,7 @@
                 <?php
 
                 include 'src/koneksi.php';
-                $sql = $kon->query("SELECT * FROM rule ORDER BY kode_rule ASC");
+                $sql = $kon->query("SELECT * FROM rule a INNER JOIN himpunan b ON a.then_rule=b.id_himpunan ORDER BY a.kode_rule ASC");
                 $no = 1;
                 while ($data = $sql->fetch_assoc()) {
                     $rules = "IF ";
@@ -43,7 +43,7 @@
                         <td><?php echo $no ?></td>
                         <td><?php echo $data['kode_rule'] ?></td>
                         <td><?php echo  $rules ?></td>
-                        <td><?php echo $data['then_rule'] ?></td>
+                        <td><?php echo $data['nama_himpunan'] ?></td>
                         <td><a href='?page=editRule&id=<?php echo $data['id_rule'] ?>' class='btn btn-default'>Edit</a>
                             <a href="?page=aksi&aksi=delRule&id=<?php echo $data['id_rule'] ?>" class='btn btn-default'>Hapus</a></td>
                     </tr>
