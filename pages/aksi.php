@@ -28,4 +28,10 @@ if ($aksi == "delPasien") {
     echo "<script>
     window.location='?page=viewRule'
     </script>";
+} else if ($aksi == "delSolusi") {
+    $id = $_GET['id'];
+    $sql = $kon->query("DELETE FROM `solusi` WHERE id_solusi='$id'");
+    echo "<script>
+    window.location='?page=viewSolusi'
+    </script>";
 }
