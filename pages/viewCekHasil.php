@@ -1,19 +1,21 @@
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title"><b>Data Variabel</b></h3>
+        <h3 class="card-title"><b>Data Hasil Cek</b></h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
         <p></p>
-        <div style="width:20%"><a href="?page=addVariabel" class="btn btn-block btn-default">Tambah Data</a></div>
-        <p></p>
+
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Tanggal Lahir</th>
+                    <th>Umur</th>
+                    <th>Berat Badan</th>
+                    <th>Tinggi Badan</th>
+                    <th>Stadium</th>
+                    <th>Hasil</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -21,19 +23,23 @@
                 <?php
 
                 include 'src/koneksi.php';
-                $sql = $kon->query("SELECT * FROM pasien ORDER BY id_pasien ASC");
+                $sql = $kon->query("SELECT * FROM hasil_cek ORDER BY id_hasil ASC");
                 $no = 1;
                 while ($data = $sql->fetch_assoc()) {
-                    echo "
+                ?>
                     <tr>
-                    <td>$no</td>
-                    <td>$data[nama]</td>
-                    <td>$data[jk]</td>
-                    <td>$data[tgl_lahir]</td>
-                    <td><a href='' class='btn btn-default'>Edit</a>
-                    <a href='' class='btn btn-default'>Hapus</a></td>
+                        <td><?php echo $no ?></td>
+                        <td><?php echo $data['nama'] ?></td>
+                        <td><?php echo $data['umur'] ?></td>
+                        <td><?php echo $data['beratbadan'] ?></td>
+                        <td><?php echo $data['tinggibadan'] ?></td>
+                        <td><?php echo $data['stadium'] ?></td>
+                        <td><?php echo $data['hasil'] ?></td>
+                        <td>
+                            <a href='?page=aksi&aksi=delHasil&id=<?php echo $data['id_hasil'] ?>' class='btn btn-default'>Hapus</a></td>
                     </tr>
-                    ";
+
+                <?php
                     $no++;
                 }
 

@@ -3,10 +3,17 @@
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title"><b>Proses Fuzzy</b></h3>
+        <h3 class="card-title"><b>Proses Penentuan Gizi Menggunakan Fuzzy Mamdani</b></h3>
     </div>
     <div class="card-body">
         <form method="post" action="">
+            <div class="form-group row">
+                <label class="col-sm-2">Nama</label>
+                <div class="col-sm-10">
+                    <input type="Text" name="nama" step=0.01 class="form-control" placeholder="Masukkan Nama Anda" value="<?php if (isset($_POST["submit"])) echo $_POST["nama"]
+                                                                                                                            ?>" required autocomplete="off">
+                </div>
+            </div>
             <div class="form-group row">
                 <label class="col-sm-2">Umur</label>
                 <div class="col-sm-10">
@@ -73,33 +80,61 @@ include "_fuzzy.php";
 if (isset($_POST["submit"])) {
 ?>
     <div class="card card-body">
+        <?php
+        //grafik suhu
+        grafikfungsikeanggotaanumur();
+        nilaigrafikumur($_POST["umur"]);
+
+        //grafik kelembapan
+        grafikfungsikeanggotaanberatbadan();
+        nilaigrafikberatbadan($_POST["berat"]);
+
+        //grafik tinggi air
+        grafikfungsikeanggotaantinggibadan();
+        nilaigrafiktinggibadan($_POST["tinggi"]);
+
+        //grafik stadium
+        grafikfungsikeanggotaanstadium();
+        nilaigrafikstadium($_POST["stadium"]);
+
+
+        //output
+        grafikoutput();
+        // gambarrules();
+
+
+        hasilfuzzifikasi($_POST["umur"], $_POST["berat"], $_POST["tinggi"], $_POST["stadium"]);
+
+        $final = inferensi($_POST["umur"], $_POST["berat"], $_POST["tinggi"], $_POST["stadium"]);
+
+        include 'src/koneksi.php';
+
+        $sqlins = $kon->query("INSERT INTO `hasil_cek`(`id_hasil`, `nama`, `umur`, `beratbadan`, `tinggibadan`, `stadium`, `hasil`) VALUES (NULL,'$_POST[nama]','$_POST[umur]','$_POST[berat]','$_POST[tinggi]','$_POST[stadium]',$final)");
+
+        ?>
+        <br>
+        <h4><b>Solusi</b></h4>
+        <div class="card">
+            <?php
+            $sqlSolusi = $kon->query("SELECT * FROM solusi");
+            while ($dataSolusi = $sqlSolusi->fetch_array()) {
+            ?>
+                <div class="card-header bg-pink">
+                    <b><?php echo $dataSolusi['tipe'] ?></b>
+                </div>
+                <div class="card-body">
+                    <p><b><?php echo $dataSolusi['solusi'] ?></b></p>
+                    <p><?php echo str_replace(";", "<br>", $dataSolusi['ket']) ?></p>
+                </div>
+            <?php
+            }
+
+            ?>
+
+        </div>
+
     <?php
-    //grafik suhu
-    grafikfungsikeanggotaanumur();
-    nilaigrafikumur($_POST["umur"]);
 
-    //grafik kelembapan
-    grafikfungsikeanggotaanberatbadan();
-    nilaigrafikberatbadan($_POST["berat"]);
-
-    //grafik tinggi air
-    grafikfungsikeanggotaantinggibadan();
-    nilaigrafiktinggibadan($_POST["tinggi"]);
-
-    //grafik stadium
-    grafikfungsikeanggotaanstadium();
-    nilaigrafikstadium($_POST["stadium"]);
-
-
-    //output
-    grafikoutput();
-    // gambarrules();
-
-
-    hasilfuzzifikasi($_POST["umur"], $_POST["berat"], $_POST["tinggi"], $_POST["stadium"]);
-
-    inferensi($_POST["umur"], $_POST["berat"], $_POST["tinggi"], $_POST["stadium"]);
-    exit;
     echo "</div>";
 }
 

@@ -34,4 +34,10 @@ if ($aksi == "delPasien") {
     echo "<script>
     window.location='?page=viewSolusi'
     </script>";
+} else if ($aksi == "delHasil") {
+    $id = $_GET['id'];
+    $sql = $kon->query("DELETE FROM `hasil_cek` WHERE id_hasil='$id'");
+    echo "<script>
+    window.location='?page=viewCekHasil'
+    </script>";
 }

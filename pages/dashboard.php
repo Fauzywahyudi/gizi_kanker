@@ -1,3 +1,20 @@
+<?php
+include "src/koneksi.php";
+
+$sqlPasien = $kon->query("SELECT id_pasien FROM pasien");
+$pasien = $sqlPasien->num_rows;
+
+$sqlVariabel = $kon->query("SELECT id_variabel FROM variabel");
+$variabel = $sqlVariabel->num_rows;
+
+$sqlHimpunan = $kon->query("SELECT id_himpunan FROM himpunan");
+$himpunan = $sqlHimpunan->num_rows;
+
+$sqlSolusi = $kon->query("SELECT id_solusi FROM solusi");
+$solusi = $sqlSolusi->num_rows;
+
+?>
+
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -24,7 +41,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>150</h3>
+            <h3><?php echo $variabel ?></h3>
 
             <p>Variabel</p>
           </div>
@@ -39,7 +56,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <h3><?php echo $himpunan ?><sup style="font-size: 20px"></sup></h3>
 
             <p>Himpunan</p>
           </div>
@@ -54,7 +71,7 @@
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>44</h3>
+            <h3><?php echo $pasien ?></h3>
 
             <p>Pasien</p>
           </div>
