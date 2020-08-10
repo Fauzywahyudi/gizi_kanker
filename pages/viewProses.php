@@ -119,10 +119,9 @@ if (isset($_POST["submit"])) {
             $sqlSolusi = $kon->query("SELECT * FROM solusi");
             while ($dataSolusi = $sqlSolusi->fetch_array()) {
             ?>
-                <div class="card-header bg-pink">
-                    <b><?php echo $dataSolusi['tipe'] ?></b>
-                </div>
+
                 <div class="card-body">
+                    <h4><b><?php echo $dataSolusi['tipe'] ?></b></h4>
                     <p><b><?php echo $dataSolusi['solusi'] ?></b></p>
                     <p><?php echo str_replace(";", "<br>", $dataSolusi['ket']) ?></p>
                 </div>

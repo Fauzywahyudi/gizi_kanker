@@ -246,9 +246,11 @@ function inferensi($umur, $berat, $tinggi, $stadium)
     $M2 = midIntegral(10, 40, 1, $a1, $a2);
     $M3 = simpleIntegral($nilai_sedikit, 1, $a2, 40);
 
+
     $A1 = simpleIntegral($nilai_banyak, 0, 0, $a1);
     $A2 = midIntegral(10, 40, 0, $a1, $a2);
     $A3 = simpleIntegral($nilai_sedikit, 0, $a2, 40);
+
 
 
 
