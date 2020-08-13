@@ -13,18 +13,24 @@ $himpunan = $sqlHimpunan->num_rows;
 $sqlSolusi = $kon->query("SELECT id_solusi FROM solusi");
 $solusi = $sqlSolusi->num_rows;
 
+$sqlHasil = $kon->query("SELECT id_hasil FROM hasil_cek");
+$cekHasil = $sqlHasil->num_rows;
+
+$sqlRule = $kon->query("SELECT id_rule FROM rule");
+$cekRule = $sqlRule->num_rows;
+
 ?>
 
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Dashboard</h1>
+        <h1 class="m-0 text-dark">Gizi Kanker Kulit</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-          <li class="breadcrumb-item active">Home</li>
+          <!-- <li class="breadcrumb-item active">Home</li> -->
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -76,7 +82,7 @@ $solusi = $sqlSolusi->num_rows;
             <p>Pasien</p>
           </div>
           <div class="icon">
-            <i class="ion ion-person-add"></i>
+            <i class="fas fa-th-large"></i>
           </div>
           <a href="?page=viewPasien" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
@@ -86,12 +92,12 @@ $solusi = $sqlSolusi->num_rows;
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>65</h3>
+            <h3><?php echo $cekHasil ?></h3>
 
             <p>Hasil Cek</p>
           </div>
           <div class="icon">
-            <i class="ion ion-pie-graph"></i>
+            <i class="fas fa-th-large"></i>
           </div>
           <a href="?page=viewCekHasil" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
@@ -100,7 +106,7 @@ $solusi = $sqlSolusi->num_rows;
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>65</h3>
+            <h3><?php echo $cekRule ?></h3>
 
             <p>Rule</p>
           </div>

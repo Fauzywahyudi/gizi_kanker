@@ -1,9 +1,11 @@
 <aside class="main-sidebar elevation-4 sidebar-light-fuchsia">
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
-    <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light"><b>Gizi Kanker</b></span>
+  <a href="" class="brand-link">
+    <img src="src/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class=" brand-text font-weight-light"><b>Gizi Kanker</b></span>
   </a>
+
+  <!-- <div class="brand-link"></div> -->
 
   <!-- Sidebar -->
   <div class="sidebar">
@@ -28,7 +30,7 @@
             <a href="?page=dashboard" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Beranda
                 <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>
@@ -40,7 +42,7 @@
             <a href="?page=dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Beranda
                 <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>
@@ -199,31 +201,6 @@
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Solusi
-                <!-- <i class="right fas fa-angle-left"></i> -->
-              </p>
-            </a>
-          </li>
-        <?php
-        }
-        if ($_GET['page'] == "viewProses") {
-        ?>
-          <li class="nav-item has-treeview">
-            <a href="?page=viewProses" class="nav-link active">
-              <i class="nav-icon fas fa-chart-bar"></i>
-              <p>
-                Proses
-                <!-- <i class="right fas fa-angle-left"></i> -->
-              </p>
-            </a>
-          </li>
-        <?php
-        } else {
-        ?>
-          <li class="nav-item has-treeview">
-            <a href="?page=viewProses" class="nav-link">
-              <i class="nav-icon fas fa-chart-bar"></i>
-              <p>
-                Proses
                 <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>

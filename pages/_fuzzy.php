@@ -126,6 +126,7 @@ function hasilfuzzifikasi($umur, $berat, $tinggi, $stadium)
 }
 function inferensi($umur, $berat, $tinggi, $stadium)
 {
+
     include 'src/koneksi.php';
     echo "<h4><b>Rules yang digunakan: </b></h4>";
     $x = 0;
@@ -240,16 +241,23 @@ function inferensi($umur, $berat, $tinggi, $stadium)
     // print_r($kondisi);
     // exit;
     $a1 = nilaiX($nilai_banyak, 10, 40);
+    // echo "<br>";
     $a2 = nilaiX($nilai_sedikit, 10, 40);
 
-    $M1 = simpleIntegral($nilai_banyak, 1, 0, $a1);
-    $M2 = midIntegral(10, 40, 1, $a1, $a2);
-    $M3 = simpleIntegral($nilai_sedikit, 1, $a2, 40);
+    $M1 = simpleIntegral($nilai_banyak, 1, 0, $a2);
+    // echo "<br>";
+    $M2 = midIntegral(10, 40, 1, $a2, $a1);
+    // echo "<br>";
+    $M3 = simpleIntegral($nilai_sedikit, 1, $a1, 40);
+    // echo "<br>";
 
 
-    $A1 = simpleIntegral($nilai_banyak, 0, 0, $a1);
-    $A2 = midIntegral(10, 40, 0, $a1, $a2);
-    $A3 = simpleIntegral($nilai_sedikit, 0, $a2, 40);
+    $A1 = simpleIntegral($nilai_banyak, 0, 0, $a2);
+    // echo "<br>";
+    $A2 = midIntegral(10, 40, 0, $a2, $a1);
+    // echo "<br>";
+    $A3 = simpleIntegral($nilai_sedikit, 0, $a1, 40);
+    // echo "<br>";
 
 
 
